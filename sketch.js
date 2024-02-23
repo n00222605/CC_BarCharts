@@ -46,7 +46,6 @@ function setup(){
         yValue: "Total",
         xValue:"Age_Group",
         labelRotation:45,
-        labelSize:10,
         numTicks:5,
         fontStyle:fontBold,
         barColor:"#03fc8c",
@@ -94,12 +93,13 @@ function setup(){
         yPos:350,
         axisLineColour:"#d9d9d9",
         labelColour:"#37b3cc",
-        barWidth:30,
-        yValue: "Female",
-        xValue:"Jorney_Time",
+        barWidth:20,
+        yValue:"Female",
+        xValue:"Journey_Time",
         labelRotation:45,
-        labelSize:100,
+        labelSize:10,
         numTicks:5,
+        fontStyle:fontBold,
         barColor:"#03fc8c",
         barStroke:"#fcba03",
         barStrokeWeight:3,
@@ -120,9 +120,8 @@ function setup(){
         axisLineColour:"#d9d9d9",
         labelColour:"#37b3cc",
         barWidth:30,
-        yValue: "Female",
-        yValue2:"Male",
-        xValue:"Jorney_Time",
+        yValues: ["Male","Female"],
+        xValue:"Journey_Time",
         labelRotation:45,
         labelSize:100,
         numTicks:5,
@@ -148,13 +147,13 @@ function setup(){
         labelColour:"#37b3cc",
         barWidth:30,
         yValue: "Female",
-        xValue:"Jorney_Time",
+        xValue:"Journey_Time",
         labelRotation:45,
         labelSize:100,
         numTicks:5,
         barColor:"#03fc8c",
         barStroke:"#fcba03",
-        barStrokeWeight:3,
+        barStrokeWeight:8,
         labelRotation:45,
         labelTextSize:10,
         tickColor:"#9003fc",
@@ -166,9 +165,9 @@ function setup(){
 
     barCharts.push(new BarChart(barChart01))
     barCharts.push(new BarChart(barChart02))
-    barCharts.push(new BarChart(barChart03))
+    barCharts.push(new HorizontalBarChart(barChart03))
     barCharts.push(new StackedBarChart(barChart04))
-    barCharts.push(new ScatterBarChart(barChart05))
+    barCharts.push(new ScatterPlotChart(barChart05))
 }
 
 function draw() {
