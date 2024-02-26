@@ -29,6 +29,11 @@ class BarChart{
 		this.tickValueColor = obj.tickValueColor;
 		this.valueGap = obj.valueGap;
 		this.tickLength = obj.tickLength;
+
+		this.titleText = obj.titleText;
+		this.titleSize = obj.titleSize;
+		this.titleColour = obj.titleColour;
+		this.titleWidth = this.chartWidth / 2;
 		
 	}
 
@@ -84,6 +89,13 @@ class BarChart{
 			text((tickGap*i).toFixed(2),(this.valueGap) - 5,0)
 			pop();
 		}
+
+		noStroke();
+		textAlign(CENTER, BOTTOM);
+		textSize(this.titleSize);
+		textFont(this.fontStyle);
+		fill(this.titleColour);
+		text(this.titleText, this.titleWidth, -325);
 
 		pop();
 		

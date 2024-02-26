@@ -1,92 +1,123 @@
-class HorizontalBarChart{
-	constructor (obj){
+class HorizontalBarChart {
+	constructor(obj) {
 		this.data = obj.data;
-		//charts
+
+		//Charts
 		this.chartWidth = obj.chartWidth;
 		this.chartHeight = obj.chartHeight;
 		this.xPos = obj.xPos;
 		this.yPos = obj.yPos;
-		//colors + custom
-		this.axisLineColour = obj.axisLineColour;
 		this.labelColour = obj.labelColour;
-		this.fontStyle = obj.fontStyle;
-		this.barColor = obj.barColor;
-		// let barColor=[];
+
+		// Axis
+		this.axisLineColour = obj.axisLineColour;
+
+		// Bar decoration
 		this.barStroke = obj.barStroke;
 		this.barStrokeWeight = obj.barStrokeWeight;
-		//bars
+		this.barColor = obj.barColor;
+		//Bars
 		this.barWidth = obj.barWidth;
 		this.yValue = obj.yValue;
 		this.xValue = obj.xValue;
-		//labels
-		this.numTicks = obj.numTicks;
 		this.maxValue = max(this.data.map(d => d[this.yValue]));
-		this.scale = this.chartHeight / this.maxValue;
+		this.scale = this.chartWidth / this.maxValue;
+        this.barStroke = obj.barStroke
+        this.barStrokeWeight = obj.barStrokeWeight
+
+		//Labels
 		this.labelRotation = obj.labelRotation;
 		this.labelTextSize = obj.labelTextSize;
-		//ticks
-		this.tickColor =  obj.tickColor;
+		this.fontStyle = obj.fontStyle;
+		this.numTicks = obj.numTicks;
+		this.tickColor = obj.tickColor;
 		this.tickValueColor = obj.tickValueColor;
+		this.tickTextSize = obj.tickTextSize;
 		this.valueGap = obj.valueGap;
 		this.tickLength = obj.tickLength;
-		
+
+
+		// Title
+		this.titleText = obj.titleText;
+		this.titleXOffset = obj.titleXOffset;
+		this.titleYOffset = obj.titleYOffset;
+		this.titleSize = obj.titleSize;
+		this.titleColour = obj.titleColour;
+		this.titleWidth = this.chartWidth / 2;
+
 	}
 
-	render(){
-		
+	render() {
 
 		push();
-		translate (this.xPos, this.yPos);
+		translate(this.xPos, this.yPos);
 		stroke(this.axisLineColour);
-		line(0,0,0,-this.chartHeight);
-		line(0,0,this.chartWidth,0 );
+		line(0, 0, 0, -this.chartHeight);
+		line(0, 0, this.chartWidth, 0);
 
-		let gap = (this.chartWidth - (this.data.length * this.barWidth))/(this.data.length + 1)
+
+
+		let gap = (this.chartHeight - (this.data.length * this.barWidth)) / (this.data.length + 1)
 		let xLabels = this.data.map(d => d[this.xValue]);
 
-		
+
 		push();
 
-		translate(gap, 0);
-		for(let i = 0; i < this.data.length; i++){
-			
-			// fill(barColor[i % barColor.length]);
+		translate(0,gap);
+		for (let i = 0; i < this.data.length; i++) {
+
+			// Making the bars
+
 			fill(this.barColor)
 			stroke(this.barStroke)
 			strokeWeight(this.barStrokeWeight)
-			rect(0,0, this.barWidth, -this.data[i][this.yValue]*this.scale);
-			
+			rect(0, -300, this.data[i][this.yValue] * this.scale, this.barWidth);
+
+			// Labels
 			push();
-			translate(this.barWidth/2,5);
-			textAlign(LEFT, CENTER);
-			rotate(this.labelRotation);
-			noStroke();
+			translate(-10, -this.chartHeight+10);
+			textAlign(RIGHT, CENTER);
+			// rotate(this.labelRotation);
 			fill(this.labelColour);
-			
+			noStroke();
 			textSize(this.labelTextSize);
-			textFont(fontLight)
-			text(xLabels[i],0,0);
+			textFont(this.fontStyle);
+			text(xLabels[i], 0, 0);
 			pop()
-			translate(gap+this.barWidth,0)
+			translate(0, gap + this.barWidth);
 		}
 		pop();
 
-		for(let i = 0; i<=this.numTicks;i++){
+		// Ticks
+		for (let i = 0; i <= this.numTicks; i++) {
 			push();
-			translate(0,i*(-this.chartHeight/this.numTicks))
+			translate(i * (this.chartWidth / this.numTicks), 15);
 			noFill();
-			stroke(this.tickColor)
-			line(0,0,this.tickLength,0)
-			textAlign(RIGHT, CENTER);
+			stroke(this.tickColor);
+			line(0, -15, 0, this.tickLength); // Adjust line coordinates
+			textAlign(LEFT, TOP); // Change textAlign
 			noStroke();
 			fill(this.tickValueColor);
-			let tickGap =  (this.maxValue / this.numTicks).toFixed(2);
-			text((tickGap*i).toFixed(2),(this.valueGap) - 5,0)
+			textSize(this.tickTextSize);
+			textFont(this.fontStyle);
+
+			let tickGap = (this.maxValue / this.numTicks).toFixed(2);
+			text((tickGap * i).toFixed(2), 0, -this.valueGap-10); // Adjust text position
 			pop();
 		}
 
+
+		// Making the title for the chart
+		noStroke();
+		textAlign(CENTER, BOTTOM);
+		textSize(this.titleSize);
+		textFont(this.fontStyle);
+		fill(this.titleColour);
+		text(this.titleText, this.titleWidth, -325);
+
+
 		pop();
-		
+
 	}
 
 
