@@ -4,7 +4,7 @@ let data2;
 let cleanData1=[];
 let cleanData2=[];
 let numRows;
-let colors = ["#f0a5d3", "#816094"]
+let colors = ["#EBD0DE", "#EBEBD0","#D0EBDE"]
 
 let fontLight;
 let fontReg;
@@ -20,7 +20,7 @@ function preload(){
 
 function setup(){
     background(50)
-    createCanvas(1500,1200)
+    createCanvas(1500,1600)
     angleMode(DEGREES)
 
     numRows = data1.rows.length;
@@ -45,28 +45,27 @@ function setup(){
         // axis + chart 
         chartHeight:300,
         chartWidth:300,
-        xPos:100,
+        xPos:200,
         yPos:350,
-        axisLineColour:"#fff",
+        axisLineColour:"#000000",
         // bars
         barWidth:20,
-        barColor:"#03fc8c",
-        barStroke:"#fcba03",
-        barStrokeWeight:3,
+        barStroke:"#000000",
+        barStrokeWeight:0.5,
         // labels
-        labelColour:"#fff",
+        labelColour:"#1C1C66",
         labelRotation:45,
         labelTextSize:10,
         // ticks
         numTicks:5,
-        tickColor:"#9003fc",
-        tickValueColor:"#fc0335",
+        tickColor:"#000000",
+        tickValueColor:"#1C1C66",
         tickLength:-5,
         valueGap:-10,
         // title
-        titleText: "Time spent Travelling to work for men",
+        titleText: "Total Road Deaths Among all Age Groups",
         titleSize: 15,
-        titleColour: "#46387C",
+        titleColour: "#1C1C66",
         // font
         fontStyle:fontBold,
     }
@@ -81,29 +80,27 @@ function setup(){
         // axis + chart
         chartHeight:300,
         chartWidth:300,
-        xPos:500,
+        xPos:700,
         yPos:350,
-        axisLineColour:"#d9d9d9",
-        barStrokeWeight:3,
+        axisLineColour:"#000000",
         // bars
         barWidth:20,
-        barColor:"#03fc8c",
-        barStroke:"#fcba03",
+        barStroke:"#000000",
+        barStrokeWeight:0.5,
         // labels
-        labelColour:"#37b3cc",
+        labelColour:"#1C1C66",
         labelRotation:45,
-        labelTextSize:10,
         labelTextSize:10,
         // ticks
         numTicks:5,
-        tickColor:"#9003fc",
-        tickValueColor:"#fc0335",
+        tickColor:"#000000",
+        tickValueColor:"#1c1c66",
         valueGap:-10,
         tickLength:-5,
         // title
-        titleText: "Time spent Travelling to work for men",
+        titleText: "Female Road Deaths Among all Age Groups",
         titleSize: 15,
-        titleColour: "#46387C",
+        titleColour: "#1c1c66",
         // font
         fontStyle:fontBold,
     }
@@ -118,30 +115,29 @@ function setup(){
         // axis + chart
         chartHeight:300,
         chartWidth:300,
-        xPos:950,
-        yPos:350,
-        axisLineColour:"#ffffff",
+        xPos:200,
+        yPos:1250,
+        axisLineColour:"#000000",
         // bars
         barWidth:20,
-        barColor:"#03fc8c",
-        barStroke:"#fcba03",
-        barStrokeWeight:3,
+        barStroke:"#000000",
+        barStrokeWeight:0.5,
         // labels
         labelRotation:45,
-        labelColour:"#9003fc",
+        labelColour:"#1c1c66",
         labelTextSize:10,
         // ticks
         numTicks:5,
-        tickColor:"#9003fc",
-        tickValueColor:"#9003fc",
+        tickColor:"#000000",
+        tickValueColor:"#1c1c66",
         tickLength:-5,
         valueGap:-10,
         // title
-        titleText: "Time spent Travelling to work for men",
+        titleText: "Time spent Travelling to work for Men",
         titleSize: 15,
         titleColour: "#46387C",
         // font
-        fontStyle:fontReg,
+        fontStyle:fontBold,
     }
 
     let barChart04 = {
@@ -155,23 +151,22 @@ function setup(){
         // axis + chart
         chartHeight:300,
         chartWidth:300,
-        xPos:100,
+        xPos:200,
         yPos:800,
-        axisLineColour:"#151126",
-        axisLineThickness: 1.3,
+        axisLineColour:"#000000",
         // bars
         barWidth:28,
-        barStroke:"#fcba03",
-        barStrokeWeight:3,
+        barStroke:"#000000",
+        barStrokeWeight:0.5,
         // labels
         labelRotation:45,
-        labelColour:"#2F3159",
-        labelTextSize:14,
+        labelColour:"#1c1c66",
+        labelTextSize:10,
         // ticks
         numTicks:5,
-        tickColor:"#151126",
-        tickValueColor:"#151126",
-        tickTextSize:14,
+        tickColor:"#000000",
+        tickValueColor:"#1c1c66",
+        tickTextSize:15,
         tickLength:-5,
         valueGap:-10,
         // title
@@ -192,28 +187,66 @@ function setup(){
         // axis + chart
         chartHeight:300,
         chartWidth:300,
-        xPos:500,
+        xPos:700,
         yPos:800,
         axisLineColour:"#000000",
         // bars
         barWidth:30,
-        barColor:"#03fc8c",
-        barStroke:"#fcba03",
-        barStrokeWeight:8,
+        barStrokeWeight:10,
         // labels
-        labelColour:"#37b3cc",
+        labelColour:"#1c1c66",
         labelRotation:0,
-        labelTextSize:7,
+        labelTextSize:8,
         // ticks
         numTicks:5,
-        tickColor:"#9003fc",
-        tickValueColor:"#fc0335",
+        tickColor:"#000000",
+        tickValueColor:"#1c1c66",
         tickLength:-5,
         valueGap:-10,
         // title
-        titleText: "Male and Female Journey Times",
+        titleText: "Time spent Travelling to work for Women",
         titleSize: 15,
         titleColour: "#46387C",
+        // font
+        fontStyle:fontBold,
+    }
+
+    let barChart06 = {
+        //----Data----//
+        data:cleanData2,
+        xValue: "Journey_Time",
+        yValues:["Male","Female"],
+        zValue:"Total",
+        //------------//
+
+        // axis + chart
+        chartHeight:300,
+        chartWidth:300,
+        xPos:700,
+        yPos:1250,
+        axisLineColour:"#000000",
+        // bars
+        barWidth:28,
+        barStroke:"#000000",
+        barStrokeWeight:0.5,
+        // avg line
+        avgLineColor:"#000000",
+        avgLineThickness:1,
+        // labels
+        labelRotation:45,
+        labelColour:"#1c1c66",
+        labelTextSize:15,
+        // ticks
+        numTicks:5,
+        tickColor:"#000000",
+        tickValueColor:"#1c1c66",
+        tickTextSize:15,
+        tickLength:-5,
+        valueGap:-10,
+        // title
+        titleText: "Average time spent travelling to work for Men and Women",
+        titleSize: 15,
+        titleColour: "#1c1c66",
         // font
         fontStyle:fontBold,
     }
@@ -224,10 +257,11 @@ function setup(){
     barCharts.push(new HorizontalBarChart(barChart03))
     barCharts.push(new StackedBarChart(barChart04))
     barCharts.push(new ScatterPlotChart(barChart05))
+    barCharts.push(new AVGStackedBarChart(barChart06))
 }
 
 function draw() {
-    background("#d9b6b6");
+    background("#F8F8F8");
     barCharts.forEach(bar => bar.render())
 }
 

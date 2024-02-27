@@ -1,42 +1,32 @@
 class HorizontalBarChart {
 	constructor(obj) {
 		this.data = obj.data;
-
+		this.yValue = obj.yValue;
+		this.xValue = obj.xValue;
 		//Charts
 		this.chartWidth = obj.chartWidth;
 		this.chartHeight = obj.chartHeight;
 		this.xPos = obj.xPos;
 		this.yPos = obj.yPos;
-		this.labelColour = obj.labelColour;
-
-		// Axis
 		this.axisLineColour = obj.axisLineColour;
-
-		// Bar decoration
+		//Bars
+		this.barColor = obj.barColor;
 		this.barStroke = obj.barStroke;
 		this.barStrokeWeight = obj.barStrokeWeight;
-		this.barColor = obj.barColor;
-		//Bars
 		this.barWidth = obj.barWidth;
-		this.yValue = obj.yValue;
-		this.xValue = obj.xValue;
-		this.maxValue = max(this.data.map(d => d[this.yValue]));
-		this.scale = this.chartWidth / this.maxValue;
         this.barStroke = obj.barStroke
         this.barStrokeWeight = obj.barStrokeWeight
-
 		//Labels
+		this.labelColour = obj.labelColour;
 		this.labelRotation = obj.labelRotation;
 		this.labelTextSize = obj.labelTextSize;
-		this.fontStyle = obj.fontStyle;
+		// ticks
 		this.numTicks = obj.numTicks;
 		this.tickColor = obj.tickColor;
 		this.tickValueColor = obj.tickValueColor;
 		this.tickTextSize = obj.tickTextSize;
 		this.valueGap = obj.valueGap;
 		this.tickLength = obj.tickLength;
-
-
 		// Title
 		this.titleText = obj.titleText;
 		this.titleXOffset = obj.titleXOffset;
@@ -44,20 +34,24 @@ class HorizontalBarChart {
 		this.titleSize = obj.titleSize;
 		this.titleColour = obj.titleColour;
 		this.titleWidth = this.chartWidth / 2;
-
+		// fonts
+		this.fontStyle = obj.fontStyle;
+		// scale
+		this.maxValue = max(this.data.map(d => d[this.yValue])); // Find the maximum value in the data for scaling
+        this.scale = this.chartHeight / this.maxValue; // Calculate the scaling factor for the chart
 	}
 
 	render() {
 
-		push();
-		translate(this.xPos, this.yPos);
+		push(); // Save current drawing style
+		translate(this.xPos, this.yPos); // Translate to the starting position for drawing
 		stroke(this.axisLineColour);
 		line(0, 0, 0, -this.chartHeight);
 		line(0, 0, this.chartWidth, 0);
 
 
 
-		let gap = (this.chartHeight - (this.data.length * this.barWidth)) / (this.data.length + 1)
+		let gap = (this.chartHeight - (this.data.length * this.barWidth)) / (this.data.length + 1); // Calculate the gap between bars
 		let xLabels = this.data.map(d => d[this.xValue]);
 
 
@@ -65,19 +59,15 @@ class HorizontalBarChart {
 
 		translate(0,gap);
 		for (let i = 0; i < this.data.length; i++) {
-
-			// Making the bars
-
-			fill(this.barColor)
+			// bars
+			fill(colors[i%colors.length])
 			stroke(this.barStroke)
 			strokeWeight(this.barStrokeWeight)
 			rect(0, -300, this.data[i][this.yValue] * this.scale, this.barWidth);
-
 			// Labels
 			push();
 			translate(-10, -this.chartHeight+10);
 			textAlign(RIGHT, CENTER);
-			// rotate(this.labelRotation);
 			fill(this.labelColour);
 			noStroke();
 			textSize(this.labelTextSize);
@@ -87,7 +77,6 @@ class HorizontalBarChart {
 			translate(0, gap + this.barWidth);
 		}
 		pop();
-
 		// Ticks
 		for (let i = 0; i <= this.numTicks; i++) {
 			push();
@@ -105,9 +94,7 @@ class HorizontalBarChart {
 			text((tickGap * i).toFixed(2), 0, -this.valueGap-10); // Adjust text position
 			pop();
 		}
-
-
-		// Making the title for the chart
+		// title
 		noStroke();
 		textAlign(CENTER, BOTTOM);
 		textSize(this.titleSize);

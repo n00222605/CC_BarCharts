@@ -1,10 +1,9 @@
-class StackedBarChart {
+class AVGStackedBarChart {
 	constructor(obj) {
-		this.data = obj.data;
+        this.data = obj.data;
 		this.xValue = obj.xValue;
 		this.yValues = obj.yValues;
 		this.zValue = obj.zValue;
-
 		//Charts
 		this.chartWidth = obj.chartWidth;
 		this.chartHeight = obj.chartHeight;
@@ -18,6 +17,9 @@ class StackedBarChart {
 		this.barWidth = obj.barWidth;
 		this.barStroke = obj.barStroke;
 		this.barStrokeWeight = obj.barStrokeWeight;
+        //avg line
+        this.avgLineColor = obj.avgLineColor;
+        this.avgLineThickness = obj.avgLineThickness;
 		//Labels
 		this.labelColour = obj.labelColour;
 		this.labelRotation = obj.labelRotation;
@@ -34,13 +36,13 @@ class StackedBarChart {
 		this.titleSize = obj.titleSize;
 		this.titleColour = obj.titleColour;
 		this.titleWidth = this.chartWidth / 2;
-		// font
+        // font
 		this.fontStyle = obj.fontStyle;
-		// scale
+        // scale
 		this.maxValue = max(this.data.map(d => d[this.zValue]));// Find the maximum value in the data for scaling
 		this.scale = this.chartHeight / this.maxValue; // Calculate the scaling factor for the chart
-
 	}
+
 
 	render() {
 
@@ -91,6 +93,10 @@ class StackedBarChart {
 		}
 		pop();
 
+        stroke(this.avgLineColor)
+        strokeWeight(this.avgLineThickness)
+        line(0,-100,this.chartWidth,-100)
+
 		// loop through the ticks
 		for (let i = 0; i <= this.numTicks; i++) {
 			push();
@@ -109,6 +115,8 @@ class StackedBarChart {
 			text((tickGap * i).toFixed(2), (this.valueGap) - 5, 0)
 			pop();
 		}
+
+        
 
 		// title
 		noStroke();
